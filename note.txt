@@ -1,0 +1,8 @@
+[2-1 React Hooks 사용하기]
+Functional Component: setState, ref 같은거 안 쓸 때 사용했었음
+hooks: Class component에서 사용했던 setState, ref를 함수에서도 사용할 수 있게 해줌
+state를 하나씩 분리함
+state는 항상 component 안에 있어야 됨
+class에서는 input을 먼저 선언하고 사용해서 DOM에 접근하고, hooks에서는 React.useRef() 사용!
+그리고 current가 하나 더 붙는다
+
