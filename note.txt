@@ -23,7 +23,6 @@ $ npm init
 $ npm i react react-dom
 $ npm i -D webpack webpack-cli
 
-
 [2-4 모듈 시스템과 웹팩 설정]
 html에서는 js 파일 하나만 인식
 다른 파일에서 불러오는 것은 webpack에서 알아서 인식하기 때문에 불려지는 것들은 일일이 쓰지 않아도 ok
