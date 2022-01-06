@@ -16,14 +16,28 @@ this.setState와는 다르게 일일이 바꿔줘야 함
 
 [2-3 웹팩 설치하기]
 Node는 서버가 아님! 그저 JS 실행기일 뿐!
-개발할 때만 webpack 필요 x
-
-* 참고:
-$ npm init
-$ npm i react react-dom
-$ npm i -D webpack webpack-cli
+개발할 때만 webpack 필요
 
 [2-4 모듈 시스템과 웹팩 설정]
 html에서는 js 파일 하나만 인식
 다른 파일에서 불러오는 것은 webpack에서 알아서 인식하기 때문에 불려지는 것들은 일일이 쓰지 않아도 ok
 확장자 모두 쓰기 귀찮을 때는 resolve 사용!
+
+[2-5 웹팩으로 빌드하기]
+webpack이 명령으로 등록되어 있지 않을 때
+=> 1. 명령어 등록  2. 직접 script에 등록(npm run dev)  3. $ npx webpack
+webpack에 babel을 추가해줘야 jsx 사용할 수 있음 & babel에도 jsx 설정해줘야됨
+
+* 참고:
+$ npm i -D @babel/core
+$ npm i -D @babel/preset-env
+$ npm i -D @babel/preset-react
+$ npm i -D babel-loader
+$ npm i -D @babel/plugin-proposal-class-properties
+
+[2-7 @babel/preset-env와 plugins]
+plugin들의 모음이 preset
+각 preset의 설정을 해줄 수도 있음
+회사에서 지원하고자 하는 browser만 쓸 수 있도록 함으로서 성능 up
+"browserslist" 구글 검색 ㄱㄱ
+plugin: 확장 프로그램
