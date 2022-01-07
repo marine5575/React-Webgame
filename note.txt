@@ -41,3 +41,9 @@ plugin들의 모음이 preset
 회사에서 지원하고자 하는 browser만 쓸 수 있도록 함으로서 성능 up
 "browserslist" 구글 검색 ㄱㄱ
 plugin: 확장 프로그램
+
+[2-8 끝말잇기 Class 만들기]
+value와 onChange는 세트! 아니면 defaultValue
+=> controlled input, uncontrolled input
+자동으로 빌드해주는 설정해주기☆☆☆ -> 실무에선 자주 까먹음
+react의 ref는 반드시 input의 ref에 onRefInput()를 연결해야됨
