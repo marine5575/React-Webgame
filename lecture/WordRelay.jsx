@@ -12,10 +12,12 @@ class WordRelay extends Component {
         e.preventDefault();
 
         if(this.state.word[this.state.word.length - 1] === this.state.value[0]) {
-            this.setState({
-                result: '딩동댕',
-                word: this.state.value,
-                value: '',
+            this.setState((prevState) => {
+                return {
+                    result: '딩동댕',
+                    word: prevState.value,
+                    value: '',
+                };
             });
         }
         else {
