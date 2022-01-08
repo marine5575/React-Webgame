@@ -1,0 +1,63 @@
+[2-1 React Hooks 사용하기]
+Functional Component: setState, ref 같은거 안 쓸 때 사용했었음
+hooks: Class component에서 사용했던 setState, ref를 함수에서도 사용할 수 있게 해줌
+state를 하나씩 분리함
+state는 항상 component 안에 있어야 됨
+class에서는 input을 먼저 선언하고 사용해서 DOM에 접근하고, hooks에서는 React.useRef() 사용!
+그리고 current가 하나 더 붙는다
+
+[2-2 Class와 Hooks 비교하기]
+Hooks가 더 간결
+but state를 바꾸면 함수를 통째로 다시 생성되기 때문에 조금 더 느림
+react에서는 html tag의 class를 사용할 수 x  but class->className
+html tag의 for도 htmlFor로 변경!
+this.setState와는 다르게 일일이 바꿔줘야 함
+함수는 옛날 state를 사용하는 경우 사용함!
+
+[2-3 웹팩 설치하기]
+Node는 서버가 아님! 그저 JS 실행기일 뿐!
+개발할 때만 webpack 필요
+
+[2-4 모듈 시스템과 웹팩 설정]
+html에서는 js 파일 하나만 인식
+다른 파일에서 불러오는 것은 webpack에서 알아서 인식하기 때문에 불려지는 것들은 일일이 쓰지 않아도 ok
+확장자 모두 쓰기 귀찮을 때는 resolve 사용!
+
+[2-5 웹팩으로 빌드하기]
+webpack이 명령으로 등록되어 있지 않을 때
+=> 1. 명령어 등록  2. 직접 script에 등록(npm run dev)  3. $ npx webpack
+webpack에 babel을 추가해줘야 jsx 사용할 수 있음 & babel에도 jsx 설정해줘야됨
+
+* 참고:
+$ npm i -D @babel/core
+$ npm i -D @babel/preset-env
+$ npm i -D @babel/preset-react
+$ npm i -D babel-loader
+$ npm i -D @babel/plugin-proposal-class-properties
+
+[2-7 @babel/preset-env와 plugins]
+plugin들의 모음이 preset
+각 preset의 설정을 해줄 수도 있음
+회사에서 지원하고자 하는 browser만 쓸 수 있도록 함으로서 성능 up
+"browserslist" 구글 검색 ㄱㄱ
+plugin: 확장 프로그램
+
+[2-8 끝말잇기 Class 만들기]
+value와 onChange는 세트! 아니면 defaultValue
+=> controlled input, uncontrolled input
+자동으로 빌드해주는 설정해주기☆☆☆ -> 실무에선 자주 까먹음
+react의 ref는 반드시 input의 ref에 onRefInput()를 연결해야됨
+ 
+[2-9 웹팩 데브 서버와 핫 리로딩]
+webpack-cli가 ver4로 바뀌면서 많이 바뀜
+webpack serve --env development => webpack-dev-server-hot
+webpack-dev 서버는 변경점을 강제 가능(hot reloading)
+수정 사항이 실시간으로 반영됨
+reloading(그냥 새로고침) != hot reloading(기존 데이터 유지하면서 새로고침)
+static: 실제 존재하는 정적 파일들의 위치
+publicPath: webpack-dev-server가 사용하는 결과물간의 상대 경로
+
+[2-10 끝말잇기 Hooks로 전환하기]
+HMR(Hot Module Reload): 어떤게 바껴서 업데이트 됐는지
+WDS(Webpack Dev Server)
+class, for이 JS의 예약어라 className, htmlFor 사용해야 됨
