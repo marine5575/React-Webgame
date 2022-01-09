@@ -34,7 +34,7 @@ class WordRelay extends Component {
         this.setState({ value: e.target.value });
     };
 
-    input;
+    input;  // this.input을 생성
 
     onRefInput = (c) => {
         this.input = c;

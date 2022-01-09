@@ -2,7 +2,7 @@ const path = require('path');
 const RefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = {
-    name: "RSP-setting",
+    name: "response-check-setting",
     mode: "development",
     devtool: "eval",
     resolve: {

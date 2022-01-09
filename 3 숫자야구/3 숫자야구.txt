@@ -1,0 +1,84 @@
+[3-1 import와 require 비교]
+require : Node의 모듈 시스템
+require랑 import랑 살짝 호환되기도 함
+exports 되는 게 객체나 배열이면 구조분해 ok
+default로 export한 건 그냥 import NumberBaseball; => 한번만 사용 가능
+다른걸로 export한 거는 import { hello } => 여러번 사용 OK
+export default랑 module.exports는 호환이 됨
+노드 모듈 시스템에서 module.exports = { hello: 'a' };
+exports.hello = 'a'는 같음
+Node의 모듈 문법은 CommonJS로 불림
+우리는 Node로 돌리고 있기 때문에 원래는 모두 require 사용해야하지만 babel이 require도 import로 변경해주기 때문에 ㄱㅊ
+webpack은 Node로 돌리는거라 require만 사용해야됨!  but client 단은 import 사용 ok
+
+[3-2 리액트 반복문(map)]
+map이 react에서 반복문을 쓰는 방법!
+반복되는 것은 배열로 만들어라
+
+[3-3 리액트 반복문(key)]
+반복문을 사용하고 싶은데 바뀌는 부분이 많을 경우
+1. 2차원 배열 사용  2. 객체 사용(이걸 더 많이 사용)
+반복문을 좀 더 가독성 있고 성능 좋게 만들기 위해 => props 사용!
+react가 key를 보고 같은 component인지 아닌지 판단함
+key는 반드시 고유하도록!
+key에 인덱스를 넣으면 나중에 성능 최적화할 때 문제가 생긴다! 아예 인덱스는 key에 넣을 생각 안하는게 good
+요소가 추가만 되는 배열인 경우 i를 써도 되긴 함! (삭제 안 할 경우)
+
+[3-4 컴포넌트 분리와 props]
+component를 따로 파일로 뺐을 때 다른 component의 값을 받아올 수 있음
+html attribute ~ React props (value, index)
+보통 반복문 단위로 component 분리
+props가 생기면서 부모, 자식 관계가 생김 -> props는 부모의 유산
+
+[3-5 주석과 메서드 바인딩]
+react가 가지는 문제의 대부분은 props에서 발생
+고조할아버지, 증조할아버지와의 관계에서 나오는 문제를 해결하기 위해 나온게 context, redux, mobex
+react는 기본적으로 context가 있고 context를 좀 더 복잡한 일을 할 수 있도록 하는게 redux
+context, redux, mobex는 해당 문제를 관리해줄 수 있는 은행 같은 것!
+
+[3-6 숫자야구 만들기]
+react에서는 push를 하면 X => 불변성 때문!!
+뭐가 바꼈는지 알 수가 없어서 새로 변수를 만들어 예전 함수 복사하고 넣고 싶은거 넣어야 됨
+예전 state와 현재 state가 달라야 rendering 함
+
+[3-7 Q&A]
+map 메서드는 함수형 프로그래밍의 꽃!☆☆☆
+map: 배열을 일대일로 짝짓는 것
+
+[3-8 숫자야구 Hooks로 전환하기]
+함수를 밖에 빼놓으면 class를 hooks로 바꿀 때 이미 독립적이기 때문에 상관 x
+setState 여러번 하면 함수형 state 사용! (옛날 state를 사용하게 될 때!)
+
+[3-9 React Devtools]
+props를 사용하다보면 문제가 많이 나옴. 특히 렌더링 문제!!
+배포 모드에서는 소스 코드 압축 및 최적화가 되어있음
+배포하려면 환경 변수를 production으로 바꿔줘야 됨
+redux는 데이터를 주고받는 부분이라서 항상 숨겨야 됨! (보안 상 문제)
+
+[3-10 shouldComponentUpdate]
+render가 되는건 state나 props가 바뀔 때
+렌더링 확인하는 것 => 크롬확장프로그램인 ReactDevTools 이용해서 "highlight updates" 설정해서 보기
+값이 바뀌지 않아도 setState만 호출되면 랜더링 다시 일어남!
+shouldComponentUpdate()로 어떤 경우에 랜더링 해야되는지 명시해주기
+
+[3-11 PureComponent와 React.memo]
+shouldComponentUpdate가 번거로우면 Component -> PureComponent
+PureComponent는 객체나 배열이 state에 있으면 판단 어려워함 => 반드시 불변성 지킬 것
+state에는 객체 구조를 안 쓰는게 good
+component를 잘게 쪼갤 수록 PureComponent 사용하기 좋음
+component가 복잡해질수록 PureComponent 쓰기 힘들 수도 있음
+hooks에서는 PureComponent 대신 React.memo 있음!!
+자식들이 모두 PureComponent / React.memo 사용하고 있을 경우 부모 component도 사용 가능
+
+[3-12 React.createRef]
+class에서 ref를 hooks처럼 사용하는 방법 => createRef()
+차이가 있는 두 방식이 왜 존재하는지 아는게 좋음
+함수형은 항상 자유도 높음(미세한 조정 가능)
+1급 객체(high order object)
+ref: state로만 해결할 수 없고 DOM을 반드시 직접 건드려야 할 때 사용
+
+[3-13 props와 state 연결하기]
+render 안에는 setState 메서드 사용 불가(<- 무한 루프)
+props는 받은 쪽에서 바꾸면 x
+props를 받은 쪽에서 바꾸고 싶다면 props를 state로 만든 후에 바꿈
+context: 손자 이상과 직접 소통할 수 있도록 만들어줌 (<- props가 바뀌지 않아도 렌더링 될 수도 있고, 깊이가 깊어질수록 해당 위험이 늘어나기 때문)

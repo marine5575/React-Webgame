@@ -2,11 +2,11 @@ const path = require('path');
 const RefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = {
-    name: "RSP-setting",
-    mode: "development",
-    devtool: "eval",
+    name: 'number-baseball-setting',
+    mode: 'development',
+    devtool: 'eval',
     resolve: {
-        extensions: ['.js', '.jsx'],
+        extensions: ['.jsx', '.js'],
     },
 
     entry: {
@@ -23,7 +23,8 @@ module.exports = {
                             browsers: ['> 1% in KR'],
                         },
                         debug: true,
-                    }], '@babel/preset-react'
+                    }],
+                    '@babel/preset-react'
                 ],
                 plugins: [
                     '@babel/plugin-proposal-class-properties',
@@ -40,7 +41,6 @@ module.exports = {
         path: path.join(__dirname, 'dist'),
         publicPath: '/dist/'
     },
-
     devServer: {
         devMiddleware: { publicPath: '/dist/' },
         static: { directory: path.resolve(__dirname) },

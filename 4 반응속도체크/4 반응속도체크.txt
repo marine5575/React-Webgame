@@ -1,0 +1,27 @@
+[4-1 React 조건문]
+JSX 안에서는 for, if를 못 씀
+React는 JS 역할만 담당함. css는 html에 쓰면 됨
+reduce() = 합계 구하는 메서드
+false, undefined, null은 jsx에서 태그 없음을 의미함
+React 안의 조건문은 보통 삼항연산자로 표시
+
+[4-2 setTimeout 넣어 반응속도체크]
+렌더링을 일어나지 않게 하고 싶은 것은 그냥 class 내 객체로 만들기
+setTimeout은 콜스택으로 넘어가더라도 clearTimeout으로 취소 가능
+
+[4-3 성능 체크와 Q&A]
+함수로 빼기보다는 Component로 따로 빼는게 더 좋음
+상관 없는 것들은 다른 Component로 분리
+함수 Component는 전체가 다시 실행됨
+=> useMemo, useCallback 같은 것을 사용  but 이건 useEffect 배워야 됨
+
+[4-4 반응속도체크 Hooks로 전환하기]
+Hooks에서는 class에서의 this 속성을 Ref가 수행함
+Ref에 뭐 넣으려면 Ref.current에 넣어야 됨
+state는 값이 바꾸면 return 부분이 다시 실행되지만, Ref는 바껴도 return 부분이 렌더링 되지 x
+=> 값이 바뀌기는 하지만 화면에 영향을 끼치고 싶지 않을 때
+Ref는 항상 current 쓰는거 잊지 말기☆☆☆
+
+[4-5 return 내부에 for과 if 쓰기]
+함수 선언하자마자 즉시 실행할 수 있도록 즉시 실행 함수를 만들어서 if, for 사용 가능
+배열 안에 JSX 코드 담아서 return도 가능  but 이렇게 할 경우에는 모두 key 붙여줘야 됨
