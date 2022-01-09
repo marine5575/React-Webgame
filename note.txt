@@ -24,3 +24,4 @@ useEffect가 componentDidMount, componentDidUpdate 역할 (일대일 대응은 x
 useEffect return에 들어가는 함수가 componentWillUnmout 역할
 useEffect(FUNCTION, ARRAY)
 두번째 인수 배열에 넣은 값들이 바뀔 때 useEffect가 실행됨
+매번 clearInterval을 하기 때문에 그냥 setTimeout을 하는 것과 동일함
