@@ -2,9 +2,9 @@ const path = require('path');
 const RefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = {
-    name: '-setting',
-    mode: 'development',
-    devtool: 'eval',
+    name: "RSP-setting",
+    mode: "development",
+    devtool: "eval",
     resolve: {
         extensions: ['.js', '.jsx'],
     },
@@ -38,7 +38,7 @@ module.exports = {
     output: {
         filename: 'app.js',
         path: path.join(__dirname, 'dist'),
-        publicPath: '/dist/',
+        publicPath: '/dist/'
     },
 
     devServer: {

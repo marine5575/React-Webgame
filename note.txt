@@ -1,27 +1,15 @@
-[5-1 리액트 라이프사이클 소개]
-component가 DOM에 딱 붙는 순간 특정한 동작을 할 수 있음(첫 렌더링) => componentDidMount()
-다시 렌더링 될 때는 수행되지 x
-부모 Component가 자식 Component를 제거할 경우 => componentWillUnmount()
-다시 렌더링될 때 실행되는 경우 => componentDidUpdate()
-☆★클래스: constructor -> render -> ref 설정 -> componentDidMount() -> (setState/props 바뀔 때) shouldComponentUpdate(true) -> render -> componentDidUpdate
-  부모 component가 나를 없앴을 때 -> componentWillUnmount -> 소멸★☆
+[6-1 로또 추첨기 컴포넌트]
+필요할 때 setInterval을 쓰고 componentWillUnmount에서 정리하기만 하면 ok
+반복문을 기점으로 Component를 분리
+보통 자식 component들은 PureComponent로 해도 됨
+useState, useEffect가 Hooks!
+함수 comp != Hooks
+comp를 다른 comp로 감싸는 것을 고차 comp라고 함
+styled component
 
-[5-2 setInterval과 라이프사이클 연동하기]
-componentDidMount()에 비동기 요청 많이 함
-componentWillUnmount()에서 예전에 요청했던 비동기 요청들을 정리를 해줌
--> componentDidMount(), componentWillUnmount()는 짝으로 다닌다
-component 사라지더라도 요청한거는 꼭! 꺼줘야 됨
-비동기 함수에서 바깥의 변수를 참조하면 클로저 문제 발생!!
-클로저 문제: 반복문과 비동기 함수가 만나서 발생하는 현상을 '클로저를 사용해서 해결'하는 문제
+[6-2 setTimeout 여러 번 사용하기]
+setTimeout 같은 건 comp가 소멸하더라도 메모리 상에는 남아있기 때문에 항상 clearTimeout 같은걸 해줘야 됨 => 메모리 누수 해결
 
-[5-4 고차 함수와 Q&A]
-메서드 안에 함수를 호출하는 부분이 들어있을 때는 선언할 때 원래 있던 화살표 뒤에 또 화살표 넣음 -> React에서 자주 쓰는 패턴(고차함수)☆☆
-Hooks는 life cycle이 존재하지 않음
-
-Hooks에서 useEffect가 life cycle 대체할 수 있음
-useEffect도 함수 component 안에 써야 됨
-useEffect가 componentDidMount, componentDidUpdate 역할 (일대일 대응은 x)
-useEffect return에 들어가는 함수가 componentWillUnmout 역할
-useEffect(FUNCTION, ARRAY)
-두번째 인수 배열에 넣은 값들이 바뀔 때 useEffect가 실행됨
-매번 clearInterval을 하기 때문에 그냥 setTimeout을 하는 것과 동일함
+[6-3 componentDidUpdate]
+componentDidUpdate에서는 업데이트 하고 싶은 상황을 잘 처리해야 됨
+life cycle 볼 때는 함수마다 console.log 찍어보기

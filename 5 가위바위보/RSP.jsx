@@ -22,6 +22,27 @@ const computerChoice = (imgCoord) => {
 };
 
 
+//                        result, imgCoord, score
+// componentDidMount
+// componentDidUpdate
+// componentWillUnmount
+
+// componentDidMount() {
+//     this.setState({
+//         imgCoord: 1,
+//         score: 2,
+//         result: 3,
+//     });
+// }
+// useEffect(() => {
+//     setImgCoord();
+//     setScore();
+// }, [imgCoord, score]);
+// useEffect(() => {
+//     setResult();
+// }, [result]);
+
+
 const RSP = () => {
     const [result, setResult] = useState('');
     const [imgCoord, setImgCoord] = useState(rspCoords.rock);
