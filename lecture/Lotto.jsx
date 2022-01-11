@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState, useRef, useEffect, useMemo, useCallback } from "react";
 
 import Ball from './Ball';
 
@@ -18,86 +18,75 @@ const getWinNumbers = () => {
     return [...winNumbers, bonusNumber];
 };
 
-class Lotto extends Component {
-    state = {
-        winNumbers: getWinNumbers(),    // 당첨 숫자들
-        winBalls: [],
-        bonus: null,    // 보너스 볼
-        redo: false,
-    };
+const Lotto = () => {
+    const lottoNumbers = useMemo(() => getWinNumbers(), []);
+    const [winNumbers, setWinNumbers] = useState(lottoNumbers);
+    const [winBalls, setWinBalls] = useState([]);
+    const [bonus, setBonus] = useState(null);
+    const [redo, setRedo] = useState(false);
+    const timeouts = useRef([]);
 
-    timeouts = [];
-    runTimeouts = () => {
-        console.log('runTimeouts');
+    // useEffect(() => {
+    //     // ajax
+    // }, []);
+    // const mounted = useRef(false);
+    // useEffect(() => {
+    //     if(!mounted.current) {
+    //         mounted.current = true;
+    //     } else {
+    //         // ajax
+    //     }
+    // }, [바뀌는값]); // componentDidUpdate만, componentDidMount는 x
 
-        const { winNumbers } = this.state;
+    useEffect(() => {
+        console.log('useEffect');
 
         for(let i = 0; i < winNumbers.length - 1; i++) {
-            this.timeouts[i] = setTimeout(() => {
-                this.setState((prevState) => {
-                    return {
-                        winBalls: [...prevState.winBalls, winNumbers[i]],
-                    }
-                });
+            timeouts.current[i] = setTimeout(() => {
+                setWinBalls((prevWinBalls) => [...prevWinBalls, winNumbers[i]]);
             }, (i + 1) * 1000);
         }
 
-        this.timeouts[winNumbers.length - 1] = setTimeout(() => {
-            this.setState({
-                bonus: winNumbers[winNumbers.length - 1],
-                redo: true,
-            });
+        timeouts.current[winNumbers.length - 1] = setTimeout(() => {
+            setBonus(winNumbers[winNumbers.length - 1]);
+            setRedo(true);
         }, (winNumbers.length) * 1000);
-    };
 
-    componentDidMount() {
-        console.log('componentDidMount');
-
-        this.runTimeouts();
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        console.log('componentDidUpdate');
-
-        if(this.state.winBalls.length === 0) {
-            this.runTimeouts();
-        }
-    }
-
-    componentWillUnmount() {
-        this.timeouts.forEach((v) => {
-            clearTimeout(v);
+        return (() => {
+            timeouts.current.forEach((v) => {
+                clearTimeout(v);
+            });
         });
-    }
+    }, [timeouts.current]); // 빈 배열이면 componentDidMount와 동일
+    // 배열에 요소가 있으면 componentDidMount와 componentDidUpdate 둘 다 수행
 
-    onClickRedo = () => {
+    useEffect(() => {
+        console.log('로또 숫자를 생성합니다.');
+    }, [winNumbers]);
+
+    const onClickRedo = useCallback(() => {
         console.log('onClickRedo');
+        console.log(winNumbers);
 
-        this.setState({
-            winNumbers: getWinNumbers(),    // 당첨 숫자들
-            winBalls: [],
-            bonus: null,    // 보너스 공
-            redo: false,
-        });
+        setWinNumbers(getWinNumbers());
+        setWinBalls([]);
+        setBonus(null);
+        setRedo(false);
 
-        this.timeouts = [];
-    };
+        timeouts.current = [];
+    }, [winNumbers]);
 
-    render() {
-        const { winBalls, bonus, redo } = this.state;
-
-        return (
-            <>
-            <div>당첨 숫자</div>
-            <div id='resultDisplay'>
-                {winBalls.map((v) => <Ball key={v} number={v} />)}
-            </div>
-            <div>보너스!</div>
-            {bonus && <Ball number={bonus} />}
-            {redo && <button onClick={this.onClickRedo}>한 번 더!</button>}
-            </>
-        );
-    }
-}
+    return (
+        <>
+        <div>당첨 숫자</div>
+        <div id='resultDisplay'>
+            {winBalls.map((v) => <Ball key={v} number={v} />)}
+        </div>
+        <div>보너스!</div>
+        {bonus && <Ball number={bonus} />}
+        {redo && <button onClick={onClickRedo}>한 번 더!</button>}
+        </>
+    );
+};
 
 export default Lotto;
