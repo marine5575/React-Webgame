@@ -1,39 +1,6 @@
-[6-1 로또 추첨기 컴포넌트]
-필요할 때 setInterval을 쓰고 componentWillUnmount에서 정리하기만 하면 ok
-반복문을 기점으로 Component를 분리
-보통 자식 component들은 PureComponent로 해도 됨
-useState, useEffect가 Hooks!
-함수 comp != Hooks
-comp를 다른 comp로 감싸는 것을 고차 comp라고 함
-styled component
-
-[6-2 setTimeout 여러 번 사용하기]
-setTimeout 같은 건 comp가 소멸하더라도 메모리 상에는 남아있기 때문에 항상 clearTimeout 같은걸 해줘야 됨 => 메모리 누수 해결
-
-[6-3 componentDidUpdate]
-componentDidUpdate에서는 업데이트 하고 싶은 상황을 잘 처리해야 됨
-life cycle 볼 때는 함수마다 console.log 찍어보기
-
-[6-4 useEffect로 업데이트 감지하기]
-useEffect에서 inputs 자리가 빈 배열이면 componentDidMount 역할 수행
-배열에 조건(바뀌는 시점)이 들어가면 componentDidUpdate 역할 수행
-배열은 요소가 바뀔 때 바뀐다고 표현하는게 아니고, 배열 자체가 바뀔 때 바뀐다고 표현
-
-[6-5 useMemo와 useCallback]
-Hooks에서 state 정의할 때 함수 넣으면 렌더링(함수 component 재실행)을 계속 다시 하기 때문에 오래 걸리는 함수의 경우 조심해야 됨
-함수 결과를 다시 실행하지 않고 기억할 수 있도록 useMemo 사용
-두번째 인자가 비어있으면 다시 실행하지 x
-useMemo: 복잡한 함수 결과값을 기억
-useRef: 일반 값을 기억
-useCallback != useMemo
-useMemo는 함수의 "return값"을 기억  but useCallback은 함수 "자체"를 기억
-useCallback의 두번째 인자에 state같은 요소들을 넣으면 state가 바뀔 때 다시 부름
-=> 어떤 때 다시 실행할지 결정해줌
-Hooks는 선언해주는 순서가 매우 중요함!!
-자식 comp에 함수를 props로 넘길 때는 반드시 useCallback을 사용해야 됨!(<- 자식의 재렌더링 방지)
-
-[6-6 Hooks에 대한 자잘한 팁들]
-Hooks는 순서가 매우 중요!! 순서 바꾸면 안됨!! ☆☆☆
-조건문 안에 절대 넣으면 안 되고 함수나 반복문 안에도 웬만하면 넣지 x
-componentDidUpdate는 한꺼번에 해서 조건문으로 나눠야 하는 것을 useEffect는 따로 할 수 있음
-componentDIdUpdate만 사용하고 싶다! => useRef를 하나 사용해서 만들기(패턴이니 그냥 기억하기)
+[7-1 틱택토와 useRedcuer 소개]
+useReducer: React에서 redux의 핵심 부분인 reducer와 상당히 비슷하게 사용할 수 있음
+reducer + context api 로 작은 앱 정도는 커버 ok
+비동기 부분 처리를 위해 결국 redux를 써야 함
+쪼갤 수 있는 부분들은 쪼개야 성능 최적화할 때 좋음
+state가 많아지면 관리하기 힘듦 => useReducer를 쓰면 하나의 state와 하나의 setState만으로 관리할 수 있게 됨
