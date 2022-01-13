@@ -4,3 +4,17 @@ reducer + context api 로 작은 앱 정도는 커버 ok
 비동기 부분 처리를 위해 결국 redux를 써야 함
 쪼갤 수 있는 부분들은 쪼개야 성능 최적화할 때 좋음
 state가 많아지면 관리하기 힘듦 => useReducer를 쓰면 하나의 state와 하나의 setState만으로 관리할 수 있게 됨
+
+[7-2 reducer, action. dispatch의 관계]
+dispatch 안에 들어가는 것을 action 객체라고 부름 (Redux에서 따옴)
+action을 해석해서 거기에 들어가는 state를 자동으로 업데이트 해줌
+action을 dispatch할 때마다 reducer가 실행 됨
+기존 initial state를 직접 바꾸면 x  but 새로운 객체를 만들어서 바뀌는 값만을 넣어줘야 됨 => 불변성
+state를 바꾸기 위해서는 항상 action을 만들어서 dispatch 해줘야 state가 바뀜. state가 어떻게 바뀔지는 reducer에 기록 됨
+Action의 이름은 대문자로 하는게 convention
+
+[7-3 action 만들어 dispatch 하기]
+immer라는 lib로 가독성 높임
+spread operator => 얕은 복사
+React에서 state 만들 때 불변성 반드시 지켜야 됨! => 객체 참조 불변성(메모리 불변성)
+dispatch를 부모에서 선언했으면 자식에게도 넘겨줘야 됨 -> context API는 그럴 필요없이 한방에 넘겨줌
