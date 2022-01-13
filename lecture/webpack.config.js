@@ -2,7 +2,7 @@ const path = require('path');
 const RefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = {
-    name: '-setting',
+    name: 'tic-tac-toe-setting',
     mode: 'development',
     devtool: 'eval',
     resolve: {
@@ -10,7 +10,7 @@ module.exports = {
     },
 
     entry: {
-        app: './client'
+        app: ['./client'],
     },
     module: {
         rules: [{
