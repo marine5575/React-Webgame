@@ -2,7 +2,7 @@ const path = require('path');
 const RefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = {
-    name: 'mine-search-setting',
+    name: 'tic-tac-toe-setting',
     mode: 'development',
     devtool: 'eval',
     resolve: {
