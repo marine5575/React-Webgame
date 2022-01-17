@@ -5,8 +5,7 @@ import { TableContext } from './MineSearch';
 
 const Table = () => {
     const { tableData } = useContext(TableContext);
-
-    console.log(tableData);
+    // console.log(tableData);
 
     return (
         <table>
