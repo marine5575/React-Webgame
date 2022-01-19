@@ -22,4 +22,10 @@ maximum call stack size exceeded => 재귀 잘못했다가 콜스택 터져버�
 옆 칸들을 살펴보지 않는 이유 => JS에서는 undefined로 저장되기 때문에 filter로 걸러짐
 한 번 검사한 칸은 다시 검사하지 않도록 캐싱 필요
 
+[8-7 승리 조건 체크와 타이머]
 배열보다는 객체로 해야 속성에 이름을 붙일 수 있어 good
+
+[8-8 Context api 최적화]
+context api를 사용하면 state가 바뀔 때마다 comp가 한번씩은 다시 렌더링됨
+함수는 다시 불러오더라도 return 부분에 있는 것이 다시 렌더링되면 안 되기 때문에 값을 기억하는 useMemo 사용
+useMemo 사용하기 싫다면 comp를 아예 두개로 분리하는 방법도 있음 (return / return 아닌 쪽)
